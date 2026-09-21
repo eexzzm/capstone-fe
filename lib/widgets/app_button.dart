@@ -37,6 +37,12 @@ class AppButton extends StatelessWidget {
   /// Custom text and icon color. Defaults to [AppColors.textOnPrimary].
   final Color? textColor;
 
+  /// Custom font size. Defaults to 16.0.
+  final double fontSize;
+
+  /// Custom font weight. Defaults to FontWeight.w700.
+  final FontWeight fontWeight;
+
   /// Custom border radius. Defaults to 12.0.
   final double borderRadius;
 
@@ -60,6 +66,8 @@ class AppButton extends StatelessWidget {
     this.height = 50.0,
     this.backgroundColor,
     this.textColor,
+    this.fontSize = 16.0,
+    this.fontWeight = FontWeight.w700,
     this.borderRadius = 12.0,
     this.elevation = 1.0,
     this.isOutlined = false,
@@ -106,8 +114,8 @@ class AppButton extends StatelessWidget {
           text,
           style: TextStyle(
             color: effectiveTextColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
+            fontSize: fontSize,
+            fontWeight: fontWeight,
             letterSpacing: 0.2,
           ),
         ),

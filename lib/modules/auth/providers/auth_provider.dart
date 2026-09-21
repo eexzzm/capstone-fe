@@ -37,6 +37,16 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void devBypassLogin() {
+    _accessToken = 'mock_dev_token';
+    _currentUser = const UserAuthModel(
+      id: 999,
+      name: 'Petani Cerdas (Demo)',
+      email: 'demo@tanipintar.com',
+    );
+    notifyListeners();
+  }
+
   Future<bool> login(String email, String password) async {
     _isLoading = true;
     _errorMessage = null;
