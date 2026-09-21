@@ -69,10 +69,8 @@ class _LoginViewState extends State<LoginView> {
         ),
       );
 
-      // Successfully logged in. Can pop or navigate to dashboard/home.
-      if (Navigator.canPop(context)) {
-        Navigator.pop(context);
-      }
+      // Successfully logged in. Navigate to MainScreen.
+      Navigator.pushReplacementNamed(context, '/main');
     } else {
       final message = authProvider.errorMessage ?? 'Gagal masuk. Periksa kembali email dan kata sandi Anda.';
       ScaffoldMessenger.of(context).showSnackBar(
@@ -197,6 +195,21 @@ class _LoginViewState extends State<LoginView> {
                                 MaterialPageRoute(builder: (_) => const RegisterView()),
                               );
                             },
+                          ),
+                          const SizedBox(height: 16.0),
+                          Center(
+                            child: TextButton.icon(
+                              onPressed: () {
+                                authProvider.devBypassLogin();
+                                Navigator.pushReplacementNamed(context, '/main');
+                              },
+                              icon: const Icon(Icons.developer_mode, size: 16),
+                              label: const Text('Bypass Login (Dev Mode)'),
+                              style: TextButton.styleFrom(
+                                foregroundColor: AppColors.textHint,
+                                textStyle: const TextStyle(fontSize: 12),
+                              ),
+                            ),
                           ),
                         ],
                       ),
