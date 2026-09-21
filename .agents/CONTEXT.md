@@ -105,7 +105,11 @@ Core user flows:
     - iconography
     - component hierarchy
     - interaction states
-3. do not show or register static data into the interface, just prepare the design / layout for the data to be show later when it is connected backend
+3. Do not show or register static dummy data into the interface; prepare the design / layout and connect with Provider to show real data when connected to the backend (use empty states if data is empty).
+4. **Card & Component Architecture (Avoid Helper Method Anti-Pattern):**
+    - Do NOT build cards, list items, or complex sub-components as private helper methods (e.g. `_buildCard()`, `_buildItem()`) inside the View's State file.
+    - Always extract cards and complex UI items into standalone `StatelessWidget` files located inside the respective module's `widgets/` directory (e.g. `lib/modules/<feature>/widgets/<card_name>.dart`) or global `lib/widgets/`.
+    - This ensures optimal Flutter widget rebuild performance, prevents file bloating/spaghetti code in `views/`, and maintains high readability and maintainability.
 
 ## Device Requirements
 
