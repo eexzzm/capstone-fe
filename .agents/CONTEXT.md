@@ -105,7 +105,8 @@ Core user flows:
     - iconography
     - component hierarchy
     - interaction states
-   
+3. do not show or register static data into the interface, just prepare the design / layout for the data to be show later when it is connected backend
+
 ## Device Requirements
 
 Primary target:
