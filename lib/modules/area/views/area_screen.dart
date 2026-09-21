@@ -5,6 +5,8 @@ import '../../../widgets/app_button.dart';
 import '../providers/area_provider.dart';
 import '../models/area_model.dart';
 import '../models/sensor_model.dart';
+import '../widgets/area_card.dart';
+import '../widgets/sensor_card.dart';
 
 class AreaScreen extends StatefulWidget {
   static const routeName = '/area';
@@ -153,7 +155,7 @@ class _AreaScreenState extends State<AreaScreen> {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 12.0),
-          child: _buildAreaCard(areas[index]),
+          child: AreaCard(area: areas[index]),
         );
       },
     );
@@ -178,7 +180,7 @@ class _AreaScreenState extends State<AreaScreen> {
       ),
       itemCount: sensors.length,
       itemBuilder: (context, index) {
-        return _buildSensorCard(sensors[index]);
+        return SensorCard(sensor: sensors[index]);
       },
     );
   }
@@ -207,205 +209,6 @@ class _AreaScreenState extends State<AreaScreen> {
         ),
       ),
       showCheckmark: false,
-    );
-  }
-
-  Widget _buildAreaCard(AreaModel area) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.0),
-        border: Border.all(color: AppColors.border),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          // Header (Title and check icon)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                area.name.isNotEmpty ? area.name : "Area ${area.id}",
-                style: const TextStyle(
-                  color: AppColors.textPrimary,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const Icon(
-                Icons.check_circle,
-                color: AppColors.accentGreen,
-                size: 24,
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          const Divider(color: AppColors.border, height: 1),
-          const SizedBox(height: 12),
-          // Metrics Row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildMetricItem(Icons.sensors, "Total Sensor", "${area.sensorsCount}"),
-              AppButton(
-                text: "Detail",
-                onPressed: () {},
-                backgroundColor: AppColors.areaAccent,
-                textColor: Colors.white,
-                borderRadius: 20.0,
-                elevation: 0,
-                height: 32.0,
-                isFullWidth: false,
-                fontSize: 12.0,
-                fontWeight: FontWeight.w600,
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSensorCard(SensorModel sensor) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.0),
-        border: Border.all(color: AppColors.border),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image Placeholder
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColors.backgroundCanvas, // Muted gray
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: const Icon(Icons.memory, size: 48, color: AppColors.textHint),
-              ),
-            ),
-            const SizedBox(height: 8),
-            // Title
-            Text(
-              sensor.name.isNotEmpty ? sensor.name : "Sensor ${sensor.id}",
-              style: const TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 4),
-            // Subtitle
-            Row(
-              children: [
-                const Icon(Icons.eco_outlined, size: 12, color: AppColors.areaAccent),
-                const SizedBox(width: 4),
-                Expanded(
-                  child: Text(
-                    "Area ${sensor.areaId}",
-                    style: const TextStyle(
-                      color: AppColors.areaAccent,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            // Actions
-            Row(
-              children: [
-                Expanded(
-                  child: AppButton(
-                    text: "Edit",
-                    onPressed: () {},
-                    backgroundColor: AppColors.actionEdit,
-                    textColor: AppColors.textPrimary,
-                    borderRadius: 16.0,
-                    elevation: 0,
-                    height: 28.0,
-                    fontSize: 11.0,
-                    fontWeight: FontWeight.w700,
-                    padding: EdgeInsets.zero,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: AppButton(
-                    text: "Delete",
-                    onPressed: () {},
-                    backgroundColor: AppColors.actionDelete,
-                    textColor: Colors.white,
-                    borderRadius: 16.0,
-                    elevation: 0,
-                    height: 28.0,
-                    fontSize: 11.0,
-                    fontWeight: FontWeight.w700,
-                    padding: EdgeInsets.zero,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMetricItem(IconData icon, String label, String value) {
-    return Row(
-      children: [
-        Icon(icon, color: AppColors.textSecondary, size: 20),
-        const SizedBox(width: 4),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                height: 1.2,
-              ),
-            ),
-            Text(
-              value,
-              style: const TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-                height: 1.2,
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

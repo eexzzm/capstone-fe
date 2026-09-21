@@ -3,6 +3,7 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../utils/colorScheme.dart';
 import '../../area/views/area_screen.dart';
 import '../../monitoring/views/dashboard_screen.dart';
+import '../../riwayat/views/riwayat_screen.dart';
 
 class MainScreen extends StatefulWidget {
   static const routeName = '/main';
@@ -26,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _buildScreens() {
     return [
       _buildDummyScreen("Home"),
-      _buildDummyScreen("Riwayat"),
+      const RiwayatScreen(),
       const DashboardScreen(), // Center Action Button
       const AreaScreen(), // The actual Area screen
       _buildDummyScreen("Profile"),
