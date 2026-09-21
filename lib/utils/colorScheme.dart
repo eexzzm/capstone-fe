@@ -93,6 +93,41 @@ class AppColors {
   /// Info Color: #0288D1 (Material Light Blue 700)
   /// Used for: Informational badges and banners.
   static const Color info = Color(0xFF0288D1);
+
+  // ==========================================
+  // 6. DASHBOARD & AREA SPECIFIC TOKENS
+  // ==========================================
+  
+  /// Accent Green / FAB Color: #34A853 (Vibrant Leaf Green)
+  static const Color accentGreen = Color(0xFF34A853);
+  
+  /// Area Screen Accent Green: #3B9E59
+  static const Color areaAccent = Color(0xFF3B9E59);
+  
+  /// Danger Badge (Bahaya): #FF3B30
+  static const Color badgeDanger = Color(0xFFFF3B30);
+  
+  /// Warning Badge (Waspada): #FFE600
+  static const Color badgeWarning = Color(0xFFFFE600);
+  
+  /// Bottom Navigation Background: #F2EFEA
+  static const Color bottomNavBg = Color(0xFFF2EFEA);
+  
+  /// Bottom Navigation Unselected: #B0BEC5
+  static const Color navUnselected = Color(0xFFB0BEC5);
+  
+  /// Bottom Navigation Default Selected: #8B5E34
+  static const Color navSelected = Color(0xFF8B5E34);
+
+  // ==========================================
+  // 7. SENSOR ACTION TOKENS
+  // ==========================================
+  
+  /// Action Edit Button: #FFE600
+  static const Color actionEdit = Color(0xFFFFE600);
+
+  /// Action Delete Button: #FF2D55
+  static const Color actionDelete = Color(0xFFFF2D55);
 }
 
 /// Material ColorScheme abstraction configured with TaniPintar design tokens.

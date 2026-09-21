@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../../../utils/colorScheme.dart';
 import '../../area/views/area_screen.dart';
+import '../../monitoring/views/dashboard_screen.dart';
 
 class MainScreen extends StatefulWidget {
   static const routeName = '/main';
@@ -18,15 +19,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    // Default to "Area" tab (index 3) since it's the only one built for now
-    _controller = PersistentTabController(initialIndex: 3);
+    // Default to "Dashboard" tab (index 2)
+    _controller = PersistentTabController(initialIndex: 2);
   }
 
   List<Widget> _buildScreens() {
     return [
       _buildDummyScreen("Home"),
       _buildDummyScreen("Riwayat"),
-      _buildDummyScreen("Dashboard"), // Center Action Button
+      const DashboardScreen(), // Center Action Button
       const AreaScreen(), // The actual Area screen
       _buildDummyScreen("Profile"),
     ];
@@ -53,32 +54,32 @@ class _MainScreenState extends State<MainScreen> {
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home_outlined),
         title: ("Home"),
-        activeColorPrimary: const Color(0xFF8B5E34),
-        inactiveColorPrimary: const Color(0xFF555555),
+        activeColorPrimary: AppColors.navSelected,
+        inactiveColorPrimary: AppColors.navUnselected,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.history),
         title: ("Riwayat"),
-        activeColorPrimary: const Color(0xFF8B5E34),
-        inactiveColorPrimary: const Color(0xFF555555),
+        activeColorPrimary: AppColors.navSelected,
+        inactiveColorPrimary: AppColors.navUnselected,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.pie_chart, color: Colors.white),
         title: ("Dashboard"),
-        activeColorPrimary: const Color(0xFF34A853), // Green Circle
-        inactiveColorPrimary: const Color(0xFF34A853),
+        activeColorPrimary: AppColors.accentGreen, // Green Circle
+        inactiveColorPrimary: AppColors.accentGreen,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.eco),
         title: ("Area"),
-        activeColorPrimary: const Color(0xFF8B5E34),
-        inactiveColorPrimary: const Color(0xFF555555),
+        activeColorPrimary: AppColors.navSelected,
+        inactiveColorPrimary: AppColors.navUnselected,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.person_outline),
         title: ("Profile"),
-        activeColorPrimary: const Color(0xFF8B5E34),
-        inactiveColorPrimary: const Color(0xFF555555),
+        activeColorPrimary: AppColors.navSelected,
+        inactiveColorPrimary: AppColors.navUnselected,
       ),
     ];
   }
@@ -95,7 +96,7 @@ class _MainScreenState extends State<MainScreen> {
       stateManagement: true,
       hideNavigationBarWhenKeyboardAppears: true,
       padding: const EdgeInsets.only(top: 8),
-      backgroundColor: const Color(0xFFF2EFEA),
+      backgroundColor: AppColors.bottomNavBg,
       isVisible: true,
       confineToSafeArea: true,
       navBarStyle: NavBarStyle.style15, // Style 15 gives the center notch FAB
