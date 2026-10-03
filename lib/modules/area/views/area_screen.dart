@@ -7,6 +7,8 @@ import '../models/area_model.dart';
 import '../models/sensor_model.dart';
 import '../widgets/area_card.dart';
 import '../widgets/sensor_card.dart';
+import '../widgets/add_area_modal.dart';
+import '../widgets/add_sensor_modal.dart';
 
 class AreaScreen extends StatefulWidget {
   static const routeName = '/area';
@@ -128,7 +130,16 @@ class _AreaScreenState extends State<AreaScreen> {
             padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 20.0),
             child: AppButton(
               text: _selectedChipIndex == 0 ? "Tambah Area" : "Tambah Sensor",
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _selectedChipIndex == 0
+                        ? const AddAreaModal()
+                        : const AddSensorModal();
+                  },
+                );
+              },
               backgroundColor: AppColors.areaAccent,
               textColor: Colors.white,
               borderRadius: 24.0,
