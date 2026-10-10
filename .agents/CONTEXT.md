@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository contains the Flutter frontend application for [PROJECT NAME].
+This repository contains the Flutter frontend application for tani pintar.
 
 The application is being developed based on UI/UX designs created in Figma.
 
@@ -40,18 +40,7 @@ This repository is NOT responsible for:
 
 Current phase: Frontend Development
 
-Development stages:
 
-1. [x] Project initialization
-2. [x] Flutter environment setup
-3. [ ] Figma design analysis (on progress)
-4. [ ] Design system implementation (on progress)
-5. [ ] Screen implementation (on progress)
-6. [ ] Frontend interaction / state logic
-7. [ ] Frontend validation
-8. [ ] Backend API integration
-9. [ ] Integration testing
-10. [ ] Final UI refinement
 
 Current priority:
 
