@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   const MyApp({
     super.key,
-    this.baseUrl = 'http://localhost:8000',
+    this.baseUrl = AppProviders.defaultBaseUrl,
   });
 
   @override

@@ -32,12 +32,16 @@ class RpcClient {
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
 
+  /// Bearer token attached to every request. Set by `AuthProvider` on login,
+  /// cleared on logout. Takes precedence over [getToken].
+  String? token;
+
   Future<Map<String, dynamic>> call({
     required String procedure,
     Map<String, dynamic>? params,
     Map<String, String>? extraHeaders,
   }) async {
-    final token = getToken != null ? await getToken!() : null;
+    final bearer = token ?? (getToken != null ? await getToken!() : null);
 
     final cleanBase = baseUrl.endsWith('/') ? baseUrl.substring(0, baseUrl.length - 1) : baseUrl;
     final cleanProcedure = procedure.startsWith('/') ? procedure : '/$procedure';
@@ -46,8 +50,8 @@ class RpcClient {
     final headers = <String, String>{
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
-      if (extraHeaders != null) ...extraHeaders,
+      if (bearer != null && bearer.isNotEmpty) 'Authorization': 'Bearer $bearer',
+      ...?extraHeaders,
     };
 
     try {

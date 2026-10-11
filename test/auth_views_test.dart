@@ -61,7 +61,10 @@ void main() {
 
   setUp(() {
     mockAuthService = MockAuthService();
-    authProvider = AuthProvider(authService: mockAuthService);
+    authProvider = AuthProvider(
+      authService: mockAuthService,
+      rpcClient: mockAuthService.rpcClient,
+    );
   });
 
   Widget buildTestApp(Widget child) {
@@ -70,6 +73,9 @@ void main() {
       child: MaterialApp(
         theme: AppTheme.lightTheme,
         home: child,
+        // Login/register redirect here on success; stub it so the harness
+        // doesn't need the real MainScreen.
+        routes: {'/main': (_) => const Scaffold()},
       ),
     );
   }

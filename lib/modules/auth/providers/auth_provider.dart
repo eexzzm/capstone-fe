@@ -5,8 +5,9 @@ import '../services/auth_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   final AuthService authService;
+  final RpcClient rpcClient;
 
-  AuthProvider({required this.authService});
+  AuthProvider({required this.authService, required this.rpcClient});
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -24,6 +25,7 @@ class AuthProvider extends ChangeNotifier {
   void setToken(String? token, {String? refreshToken}) {
     _accessToken = token;
     _refreshToken = refreshToken;
+    rpcClient.token = token;
     notifyListeners();
   }
 
@@ -39,6 +41,7 @@ class AuthProvider extends ChangeNotifier {
 
   void devBypassLogin() {
     _accessToken = 'mock_dev_token';
+    rpcClient.token = _accessToken;
     _currentUser = const UserAuthModel(
       id: 999,
       name: 'Petani Cerdas (Demo)',
@@ -60,6 +63,7 @@ class AuthProvider extends ChangeNotifier {
       if (response.success && response.data != null) {
         _accessToken = response.data!.accessToken;
         _refreshToken = response.data!.refreshToken;
+        rpcClient.token = _accessToken;
         _currentUser = response.data!.user;
         _isLoading = false;
         notifyListeners();
@@ -96,6 +100,7 @@ class AuthProvider extends ChangeNotifier {
       if (response.success && response.data != null) {
         _accessToken = response.data!.accessToken;
         _refreshToken = response.data!.refreshToken;
+        rpcClient.token = _accessToken;
         _currentUser = response.data!.user;
         _isLoading = false;
         notifyListeners();
@@ -130,6 +135,7 @@ class AuthProvider extends ChangeNotifier {
     } finally {
       _accessToken = null;
       _refreshToken = null;
+      rpcClient.token = null;
       _currentUser = null;
       _isLoading = false;
       notifyListeners();

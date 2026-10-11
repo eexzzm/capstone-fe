@@ -19,14 +19,23 @@ import '../modules/riwayat/services/history_service.dart';
 class AppProviders {
   AppProviders._();
 
+  /// Base URL of the TaniPintar API. Override at build time with
+  /// `flutter run --dart-define=API_BASE_URL=http://localhost:8000`.
+  static const String defaultBaseUrl = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'https://arifingaybanget.cipicung.id',
+  );
+
   static List<SingleChildWidget> buildProviders({
-    required String baseUrl,
+    String baseUrl = defaultBaseUrl,
     Future<String?> Function()? getToken,
+    RpcClient? client,
   }) {
-    final rpcClient = RpcClient(
-      baseUrl: baseUrl,
-      getToken: getToken,
-    );
+    final rpcClient = client ??
+        RpcClient(
+          baseUrl: baseUrl,
+          getToken: getToken,
+        );
 
     final authService = AuthService(rpcClient: rpcClient);
     final homeService = HomeService(rpcClient: rpcClient);
@@ -50,7 +59,10 @@ class AppProviders {
         create: (_) => NavigationProvider(),
       ),
       ChangeNotifierProvider<AuthProvider>(
-        create: (_) => AuthProvider(authService: authService),
+        create: (_) => AuthProvider(
+          authService: authService,
+          rpcClient: rpcClient,
+        ),
       ),
       ChangeNotifierProvider<HomeProvider>(
         create: (_) => HomeProvider(homeService: homeService),
